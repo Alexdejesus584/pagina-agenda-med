@@ -17,6 +17,8 @@ Este repositório contém o código-fonte da landing page / página de vendas of
 ## 🚀 Estrutura dos Arquivos
 
 - `index.php` — Página de vendas completa com simulação interativa de agendamento WhatsApp, depoimentos, tabela comparativa de planos e integração com Kiwify.
+- `afiliados/index.html` — Portal interativo do afiliado com simulador de lucros e cópia de scripts com 1 clique.
+- `materiais-afiliados/` — Kit completo de divulgação (manual, scripts de WhatsApp e copies de anúncios).
 - `index.html` — Versão estática equivalente da página.
 - `capa.jpg` — Mockup visual 3D oficial do Agenda-Med.
 - `.htaccess` — Otimização de cache, compactação Gzip e cabeçalhos de segurança (HSTS, CSP, X-Frame-Options).
@@ -26,6 +28,7 @@ Este repositório contém o código-fonte da landing page / página de vendas of
 
 ## 🤝 Programa de Afiliados Kiwify
 
+- **Portal Oficial do Afiliado**: [https://agendamed.m2vendas.com.br/afiliados](https://agendamed.m2vendas.com.br/afiliados)
 - **Comissão**: **40%** líquido por venda (R$ 181,02 de lucro por conversão para o afiliado).
 - **Atribuição**: Último clique (recomendado).
 - **Duração dos cookies**: 60 dias.
