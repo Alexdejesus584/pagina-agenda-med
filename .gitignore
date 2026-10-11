@@ -1,0 +1,19 @@
+# ==============================================================================
+# GITIGNORE — BASELINE DE SEGURANÇA (CÉREBRO DA LUCY)
+# ==============================================================================
+
+# Segredos e Credenciais - NUNCA versionar
+.env
+.env.php
+*.env
+docs/CREDENCIAIS*.md
+credenciais/
+
+# Logs e Dados Temporários
+storage/logs/*.log
+*.log
+
+# Backups e Compactados
+*.zip
+*.tar.gz
+*.bak

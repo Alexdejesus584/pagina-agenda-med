@@ -1,0 +1,967 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Agenda-Med | Recepção e Agendamento para Clínicas no WhatsApp | Licença Anual</title>
+  
+  <meta name="description" content="Sistema completo de agendamento e recepção com IA para clínicas no WhatsApp. Licença anual de R$ 500 com atualizações futuras inclusas e instalação gratuita. Roda no seu domínio e na Hostinger."/>
+  
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@200..700,0..1&display=swap" rel="stylesheet"/>
+  
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            background: "#0A0A0B",
+            surface: "#121214",
+            "surface-hover": "#1C1C1F",
+            primary: "#00FF66",
+            "primary-glow": "rgba(0, 255, 102, 0.4)",
+            secondary: "#212124",
+            "on-background": "#FFFFFF",
+            "on-surface": "#A1A1AA",
+            outline: "#27272A"
+          },
+          fontFamily: {
+            display: ["Outfit", "sans-serif"],
+            body: ["Inter", "sans-serif"],
+            mono: ["JetBrains Mono", "monospace"],
+          },
+          spacing: {
+            "container-max": "1180px",
+          }
+        },
+      },
+    }
+  </script>
+  
+  <style>
+    :root {
+      --primary: #00FF66;
+      --primary-glow: rgba(0, 255, 102, 0.4);
+      --background: #0A0A0B;
+      --surface: #121214;
+      --surface-hover: #1C1C1F;
+      --outline: #27272A;
+      --text-1: #FFFFFF;
+      --text-2: #D4D4D8;
+      --text-3: #A1A1AA;
+      --text-muted: #71717A;
+    }
+
+    /* Reset e Base Tipográfica (Cérebro da Lucy / Régua Visual) */
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+    
+    body {
+      overflow-x: hidden;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--text-3);
+      background-color: var(--background);
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+    }
+
+    /* ============================================================
+       SISTEMA DE HIERARQUIA TIPOGRÁFICA (ALTO CONTRASTE E ESCALA)
+       ============================================================ */
+
+    /* 1. Super-título / Kicker (Categoria ou Selo do Módulo) */
+    .kicker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* 2. Título Principal da Página (Hero) */
+    h1, .h1-title {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      color: #FFFFFF;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+    }
+
+    /* 3. Títulos de Seção */
+    h2, .h2-title {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+    }
+
+    /* 4. Títulos de Cards e Módulos */
+    h3, .h3-title {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      color: #FFFFFF;
+      letter-spacing: -0.01em;
+      line-height: 1.35;
+    }
+
+    /* 5. Subtítulos / Parágrafos de Destaque */
+    .lead-text {
+      color: var(--text-2);
+      font-weight: 400;
+      line-height: 1.6;
+    }
+
+    /* 6. Texto Corrido / Parágrafo Padrão */
+    .body-text {
+      color: var(--text-3);
+      font-weight: 400;
+      line-height: 1.55;
+    }
+
+    /* 7. Texto Pequeno / Legendas / Avisos */
+    .caption-text {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* 8. Preço em Destaque (Big Numbers) */
+    .price-display {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      color: var(--primary);
+      text-shadow: 0 0 28px rgba(0, 255, 102, 0.45);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    /* Escala Desktop */
+    @media (min-width: 768px) {
+      h1, .h1-title { font-size: 46px; line-height: 1.15; font-weight: 800; }
+      h2, .h2-title { font-size: 32px; line-height: 1.25; font-weight: 800; }
+      h3, .h3-title { font-size: 18px; line-height: 1.35; font-weight: 700; }
+      .lead-text { font-size: 16px; line-height: 1.6; color: #D4D4D8; }
+      .body-text { font-size: 13.5px; line-height: 1.55; color: #9CA3AF; }
+      .price-display { font-size: 50px; }
+    }
+
+    /* Escala Mobile Estrita (Hierarquia nítida, alto contraste, sem aperto) */
+    @media (max-width: 767px) {
+      h1, .h1-title { font-size: 27px !important; line-height: 1.18 !important; font-weight: 800 !important; }
+      h2, .h2-title { font-size: 21px !important; line-height: 1.25 !important; font-weight: 800 !important; }
+      h3, .h3-title { font-size: 16px !important; line-height: 1.35 !important; font-weight: 700 !important; }
+      .kicker { font-size: 10px !important; letter-spacing: 0.12em !important; font-weight: 800 !important; }
+      .lead-text { font-size: 13.5px !important; line-height: 1.55 !important; color: #D4D4D8 !important; }
+      .body-text { font-size: 12.5px !important; line-height: 1.5 !important; color: #9CA3AF !important; }
+      .caption-text { font-size: 11px !important; line-height: 1.4 !important; }
+      .price-display { font-size: 36px !important; }
+
+      /* Ajuste de espaçamentos para tela vertical */
+      section {
+        padding-top: 3rem !important;
+        padding-bottom: 3rem !important;
+      }
+      .polycard {
+        padding: 16px 14px !important;
+      }
+      .btn-mobile-full {
+        width: 100% !important;
+      }
+    }
+
+    /* ============================================================
+       BOTÕES M2 VENDAS: ALTURA ESTRITA DE 40px A 42px, NUNCA ENORMES
+       ============================================================ */
+    .btn-primary, .btn-outline {
+      height: 42px !important;
+      min-height: 42px !important;
+      max-height: 42px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      padding: 0 18px !important;
+      border-radius: 10px !important;
+      font-size: 13px !important;
+      font-weight: 700 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.04em !important;
+      white-space: nowrap !important;
+      touch-action: manipulation;
+      box-sizing: border-box !important;
+      line-height: 1 !important;
+      text-decoration: none !important;
+      cursor: pointer;
+    }
+
+    .btn-primary span.material-symbols-outlined,
+    .btn-outline span.material-symbols-outlined {
+      font-size: 18px !important;
+      line-height: 1 !important;
+      vertical-align: middle;
+    }
+
+    @media (max-width: 640px) {
+      .btn-primary, .btn-outline {
+        height: 40px !important;
+        min-height: 40px !important;
+        max-height: 40px !important;
+        padding: 0 14px !important;
+        font-size: 12px !important;
+        letter-spacing: 0.02em !important;
+      }
+    }
+
+    /* Previne zoom automático indesejado no iOS Safari */
+    input, select, textarea {
+      font-size: 16px !important;
+    }
+
+    /* Cards com bordas sutis e cantos polidos */
+    .polycard {
+      background-color: var(--surface);
+      border: 1px solid var(--outline);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .polycard:hover {
+        transform: translateY(-4px);
+        border-color: var(--primary);
+        box-shadow: 0 16px 32px -8px rgba(0, 255, 102, 0.15);
+      }
+    }
+
+    /* Efeitos de Movimento Neon do Cérebro da Lucy */
+    
+    /* 1. Pulso de Brilho Neon (Respiração de luz suave) */
+    @keyframes pulsar-brilho {
+      0%, 100% { filter: drop-shadow(0 0 12px rgba(0, 255, 102, 0.25)); }
+      50%      { filter: drop-shadow(0 0 28px rgba(0, 255, 102, 0.65)); }
+    }
+    .pulso-neon {
+      animation: pulsar-brilho 3s ease-in-out infinite;
+    }
+
+    /* 2. LED com currentColor (Piscar orgânico de status conectado) */
+    @keyframes led-vivo {
+      0%, 100% { opacity: 1; filter: drop-shadow(0 0 6px currentColor); }
+      50%      { opacity: 0.25; filter: drop-shadow(0 0 0 transparent); }
+    }
+    .led-vivo {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      animation: led-vivo 1.5s infinite;
+      flex-shrink: 0;
+      display: inline-block;
+      background: var(--primary);
+      color: var(--primary);
+    }
+
+    /* 3. Varredura de Brilho no Card (Scanner que dá sensação de tecnologia viva) */
+    .card-scanner {
+      position: relative;
+      overflow: hidden;
+    }
+    .card-scanner::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -60%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(100deg, transparent, rgba(0, 255, 102, 0.12), transparent);
+      animation: varrer 5s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes varrer {
+      0%, 70% { left: -60%; }
+      100%    { left: 120%; }
+    }
+
+    /* 4. Flutuar suave sem cansar a visão */
+    @keyframes flutuar {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-6px); }
+    }
+    .flutuar-suave {
+      animation: flutuar 6s ease-in-out infinite;
+    }
+
+    /* Painel Glassmorphism */
+    .glass-panel {
+      background: rgba(18, 18, 20, 0.75);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    /* Botão Primário Neon M2 Vendas */
+    .btn-primary {
+      background-color: var(--primary);
+      color: #0A0A0B;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 20px rgba(0, 255, 102, 0.25);
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .btn-primary:hover {
+        box-shadow: 0 0 32px rgba(0, 255, 102, 0.55);
+        transform: translateY(-2px);
+      }
+    }
+    .btn-primary:active {
+      transform: scale(0.98);
+    }
+
+    /* Botão Secundário / Outline */
+    .btn-outline {
+      border: 1px solid var(--outline);
+      color: #FFFFFF;
+      transition: all 0.3s ease;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .btn-outline:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+        background: rgba(0, 255, 102, 0.05);
+      }
+    }
+    .btn-outline:active {
+      transform: scale(0.98);
+    }
+
+    .text-neon {
+      color: var(--primary);
+      text-shadow: 0 0 20px rgba(0, 255, 102, 0.4);
+    }
+
+    /* Acessibilidade — Redução de Movimento (Cérebro da Lucy) */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .polycard, .btn-primary, .card-scanner::after, .pulso-neon, .led-vivo, .flutuar-suave {
+        animation: none !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-background font-body text-on-surface antialiased selection:bg-primary selection:text-background min-h-screen flex flex-col">
+
+  <!-- Top Header -->
+  <header class="glass-panel sticky top-0 z-50 border-b border-outline">
+    <div class="flex justify-between items-center w-full px-4 md:px-6 py-4 max-w-container-max mx-auto">
+      <a href="https://m2vendas.com.br/" class="flex items-center gap-2 text-decoration-none group">
+        <img src="https://m2vendas.com.br/img/logo_transparent.png" alt="M2 Vendas Logo" class="h-10 sm:h-12 w-auto group-hover:scale-105 transition-transform pulso-neon" />
+        <span class="font-display text-lg sm:text-xl font-bold text-on-background tracking-wide uppercase">Agenda<span class="text-neon">-Med</span></span>
+      </a>
+      
+      <nav class="hidden md:flex items-center gap-8 text-sm">
+        <a class="text-on-surface hover:text-primary transition-colors font-medium" href="#recursos">Recursos</a>
+        <a class="text-on-surface hover:text-primary transition-colors font-medium" href="#demonstracao">Demonstração</a>
+        <a class="text-on-surface hover:text-primary transition-colors font-medium" href="#vantagens">Vantagens</a>
+        <a class="text-on-surface hover:text-primary transition-colors font-medium" href="#infraestrutura">Hospedagem Hostinger</a>
+        <a class="text-on-surface hover:text-primary transition-colors font-medium" href="#faq">Dúvidas</a>
+      </nav>
+      
+      <div class="flex items-center gap-3">
+        <a href="https://pay.kiwify.com.br/FHyPL4m" class="btn-primary flex items-center gap-2 text-decoration-none">
+          <span>Licença Anual</span>
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden py-16 md:py-24 border-b border-outline">
+    <div class="absolute inset-0 z-0 pointer-events-none">
+      <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-primary opacity-5 rounded-full blur-[140px]"></div>
+    </div>
+
+    <div class="max-w-container-max mx-auto px-4 md:px-6 relative z-10 flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+      
+      <!-- Textos Hero -->
+      <div class="lg:w-7/12 text-left">
+        <div class="inline-flex flex-wrap items-center gap-2 px-3.5 py-1.5 rounded-full border border-primary/40 bg-primary/10 text-primary text-xs font-mono mb-6">
+          <span class="led-vivo"></span>
+          <span class="kicker !text-primary">LICENÇA ANUAL • ATUALIZAÇÕES FUTURAS • INSTALAÇÃO GRATUITA</span>
+        </div>
+        
+        <h1 class="h1-title mb-5 sm:mb-6">
+          Sua Clínica com Recepção e Agendamento no WhatsApp <br class="hidden sm:block"/>
+          <span class="text-neon">24 Horas por Dia com IA</span>
+        </h1>
+        
+        <p class="lead-text mb-6 sm:mb-8 max-w-2xl">
+          Automatize a triagem, tire dúvidas sobre procedimentos, faça agendamentos em tempo real e elimine as faltas dos pacientes. 
+          <strong class="text-white font-semibold">Licença anual de apenas R$ 500 com direito a todas as atualizações futuras e instalação gratuita no seu domínio e hospedagem.</strong>
+        </p>
+
+        <!-- Selos Rápidos -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-10 text-xs font-mono text-on-surface">
+          <div class="flex items-center gap-2 bg-surface p-2.5 rounded-lg border border-outline">
+            <span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+            <span>Roda na Hostinger</span>
+          </div>
+          <div class="flex items-center gap-2 bg-surface p-2.5 rounded-lg border border-outline">
+            <span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+            <span>No seu domínio</span>
+          </div>
+          <div class="flex items-center gap-2 bg-surface p-2.5 rounded-lg border border-outline">
+            <span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+            <span>Suporte de instalação</span>
+          </div>
+        </div>
+
+        <!-- Botões de Ação -->
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <a href="https://pay.kiwify.com.br/FHyPL4m" class="btn-primary flex items-center justify-center gap-2 text-decoration-none">
+            <span>GARANTIR LICENÇA — R$ 500</span>
+            <span class="material-symbols-outlined">bolt</span>
+          </a>
+          <a href="https://wa.me/5575998636036?text=Ol%C3%A1%21+Gostaria+de+tirar+d%C3%BAvidas+sobre+o+Agenda-Med+da+M2+Vendas." target="_blank" rel="noopener" class="btn-outline flex items-center justify-center gap-2 text-decoration-none">
+            <span class="material-symbols-outlined text-green-400">chat</span>
+            <span>Dúvidas no WhatsApp</span>
+          </a>
+        </div>
+        
+        <p class="text-xs text-on-surface/70 mt-3 font-mono">
+          🔒 Pagamento Seguro via Kiwify • Garantia de 7 Dias • Acesso Imediato
+        </p>
+      </div>
+
+      <!-- Imagem Hero -->
+      <div class="lg:w-5/12 w-full">
+        <div class="relative rounded-2xl overflow-hidden border border-outline shadow-2xl glass-panel group flutuar-suave">
+          <img src="capa.jpg" alt="Agenda-Med Sistema de Recepção e Agendamento para Clínicas no WhatsApp" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"/>
+          
+          <div class="absolute bottom-4 left-4 right-4 glass-panel p-3.5 rounded-xl border border-primary/30 flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <span class="led-vivo"></span>
+              <div>
+                <p class="font-bold text-xs text-on-background">SISTEMA ATIVO NO WHATSAPP</p>
+                <p class="text-[11px] text-primary font-mono">Licença Anual • Atualizações Inclusas</p>
+              </div>
+            </div>
+            <span class="text-xs font-bold bg-primary text-black px-2.5 py-1 rounded">R$ 500</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Simulador de Conversa do WhatsApp (Demonstração Interativa) -->
+  <section id="demonstracao" class="py-16 md:py-20 px-3 sm:px-4 md:px-6 max-w-container-max mx-auto w-full border-b border-outline">
+    <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+      <span class="kicker mb-2">VEJA NA PRÁTICA</span>
+      <h2 class="h2-title mb-3 sm:mb-4">
+        Como a Recepcionista Virtual Atende Seus Pacientes
+      </h2>
+      <p class="lead-text max-w-2xl mx-auto">
+        Sem parecer um robô engessado. A IA conversa de forma natural, consulta horários reais e confirma a consulta direto na agenda.
+      </p>
+    </div>
+
+    <!-- Celular Mockup Interativo -->
+    <div class="w-full max-w-[420px] mx-auto bg-[#0B141A] rounded-[32px] sm:rounded-[36px] border-4 border-[#2A3942] shadow-2xl overflow-hidden p-2">
+      <!-- Topo WhatsApp -->
+      <div class="bg-[#202C33] px-4 py-3 rounded-t-[24px] sm:rounded-t-[28px] flex items-center gap-3 border-b border-[#2A3942]">
+        <div class="w-10 h-10 rounded-full bg-primary/20 border border-primary flex items-center justify-center text-primary font-bold">
+          <span class="material-symbols-outlined text-xl">local_hospital</span>
+        </div>
+        <div class="flex-grow">
+          <h4 class="text-white text-sm font-bold flex items-center gap-1">
+            Clínica São Lucas
+            <span class="material-symbols-outlined text-primary text-xs" style="font-variation-settings: 'FILL' 1;">verified</span>
+          </h4>
+          <p class="text-[#00A884] text-[11px] font-mono flex items-center gap-1.5">
+            <span class="led-vivo !w-2 !h-2"></span> Online agora (Agenda-Med IA)
+          </p>
+        </div>
+      </div>
+
+      <!-- Corpo da Conversa -->
+      <div class="p-4 space-y-3 text-xs font-body min-h-[380px] bg-[radial-gradient(#1f2c34_1px,transparent_1px)] [background-size:16px_16px]">
+        <!-- Msg Paciente -->
+        <div class="flex justify-end">
+          <div class="bg-[#005C4B] text-white p-3 rounded-2xl rounded-tr-none max-w-[85%] shadow">
+            <p>Olá! Preciso marcar uma consulta com cardiologista para esta semana. Vocês atendem Unimed?</p>
+            <span class="text-[10px] text-gray-300 block text-right mt-1">14:02</span>
+          </div>
+        </div>
+
+        <!-- Msg IA -->
+        <div class="flex justify-start">
+          <div class="bg-[#202C33] text-gray-200 p-3 rounded-2xl rounded-tl-none max-w-[85%] shadow">
+            <p>Olá! Sim, atendemos Unimed! 😊</p>
+            <p class="mt-1">Temos o Dr. Roberto com horários disponíveis:</p>
+            <p class="mt-1 font-mono text-primary">🗓️ Quinta-feira (15/10) às 14:30<br/>🗓️ Sexta-feira (16/10) às 09:00</p>
+            <p class="mt-1">Qual desses horários fica melhor para você?</p>
+            <span class="text-[10px] text-gray-400 block text-right mt-1">14:02</span>
+          </div>
+        </div>
+
+        <!-- Msg Paciente -->
+        <div class="flex justify-end">
+          <div class="bg-[#005C4B] text-white p-3 rounded-2xl rounded-tr-none max-w-[85%] shadow">
+            <p>Quinta às 14:30 fica perfeito!</p>
+            <span class="text-[10px] text-gray-300 block text-right mt-1">14:03</span>
+          </div>
+        </div>
+
+        <!-- Msg IA Confirmação -->
+        <div class="flex justify-start">
+          <div class="bg-[#202C33] text-gray-200 p-3 rounded-2xl rounded-tl-none max-w-[90%] shadow border border-primary/30">
+            <p class="font-bold text-primary flex items-center gap-1">
+              <span class="material-symbols-outlined text-sm">check_circle</span> Consulta Confirmada!
+            </p>
+            <p class="mt-1">Dr. Roberto — Cardiologia</p>
+            <p>📅 Quinta-feira (15/10) às 14:30</p>
+            <p class="text-[11px] text-gray-400 mt-1">📍 Av. Paulista, 1000 - Sala 402</p>
+            <p class="text-[11px] text-primary/90 mt-1">Enviaremos um lembrete 24h antes para confirmação de presença!</p>
+            <span class="text-[10px] text-gray-400 block text-right mt-1">14:03</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparativo: Sem Mensalidade -->
+  <section id="vantagens" class="py-16 md:py-20 px-3 sm:px-4 md:px-6 max-w-container-max mx-auto w-full border-b border-outline">
+    <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+      <span class="kicker mb-2">LIBERDADE TOTAL</span>
+      <h2 class="h2-title mb-3 sm:mb-4">
+        Chega de Pagar Mensalidades Caras Todo Mês
+      </h2>
+      <p class="lead-text max-w-2xl mx-auto">
+        A maioria das plataformas cobra assinaturas recorrentes de R$ 300 a R$ 800 todos os meses e ainda prende os dados dos seus pacientes. Veja a diferença com o Agenda-Med:
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 max-w-4xl mx-auto">
+      
+      <!-- Outros Sistemas -->
+      <div class="polycard p-4 sm:p-6 md:p-8 rounded-2xl border-red-500/30 bg-surface/50">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="material-symbols-outlined text-red-400 text-3xl">cancel</span>
+          <h3 class="h3-title">Outras Plataformas SaaS</h3>
+        </div>
+        <ul class="space-y-4 text-sm text-on-surface">
+          <li class="flex items-start gap-2.5">
+            <span class="text-red-400 font-bold">✕</span>
+            <span>Cobram de <strong>R$ 300 a R$ 800 todo mês</strong> sem parar.</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <span class="text-red-400 font-bold">✕</span>
+            <span>Se você parar de pagar, perde todo o histórico e o atendimento para.</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <span class="text-red-400 font-bold">✕</span>
+            <span>Limites rígidos de mensagens por mês ou cobrança por lead.</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <span class="text-red-400 font-bold">✕</span>
+            <span>Você nunca é dono do sistema, fica dependente da empresa.</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Agenda-Med -->
+      <div class="polycard p-4 sm:p-6 md:p-8 rounded-2xl border-primary/60 bg-surface relative overflow-hidden">
+        <div class="absolute top-0 right-0 bg-primary text-black font-bold text-[10px] px-3 py-1 font-mono uppercase tracking-wider rounded-bl-lg">
+          Vencedor
+        </div>
+        <div class="flex items-center gap-3 mb-5">
+          <span class="material-symbols-outlined text-primary text-3xl">verified</span>
+          <h3 class="h3-title">Agenda-Med (M2 Vendas)</h3>
+        </div>
+        <ul class="space-y-4 text-sm text-on-surface">
+          <li class="flex items-start gap-2.5">
+            <span class="text-primary font-bold">✓</span>
+            <span><strong class="text-on-background">Licença Anual de R$ 500:</strong> Economize milhares de reais em relação a mensalidades abusivas de outros softwares.</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <span class="text-primary font-bold">✓</span>
+            <span><strong class="text-on-background">Atualizações Futuras Inclusas:</strong> Direito a todas as novidades e melhorias durante o período da sua licença.</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <span class="text-primary font-bold">✓</span>
+            <span><strong class="text-on-background">Hospedagem Econômica:</strong> Roda perfeitamente no seu domínio na Hostinger (plano mais simples).</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <span class="text-primary font-bold">✓</span>
+            <span><strong class="text-on-background">Instalação Gratuita:</strong> Deixamos tudo 100% configurado e pronto para operar sem custo extra.</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- O que o sistema faz -->
+  <section id="recursos" class="py-16 md:py-20 px-3 sm:px-4 md:px-6 max-w-container-max mx-auto w-full border-b border-outline">
+    <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+      <span class="kicker mb-2">FUNCIONALIDADES PRONTAS</span>
+      <h2 class="h2-title mb-3 sm:mb-4">
+        Tudo o Que Sua Recepção Precisa Automatizado
+      </h2>
+      <p class="lead-text max-w-2xl mx-auto">
+        Projetado especificamente para clínicas médicas, consultórios odontológicos e centros de estética.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+      
+      <div class="polycard p-4 sm:p-6 rounded-xl flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary mb-4">
+            <span class="material-symbols-outlined text-2xl">support_agent</span>
+          </div>
+          <h3 class="h3-title mb-2">Triagem & Dúvidas 24/7</h3>
+          <p class="body-text">
+            Responde dúvidas frequentes, convênios aceitos, endereço, horários de funcionamento e valores base de consultas a qualquer hora do dia ou da noite.
+          </p>
+        </div>
+      </div>
+
+      <div class="polycard p-4 sm:p-6 rounded-xl flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary mb-4">
+            <span class="material-symbols-outlined text-2xl">calendar_month</span>
+          </div>
+          <h3 class="h3-title mb-2">Agendamento Inteligente</h3>
+          <p class="body-text">
+            Coleta nome, telefone, procedimento e profissional desejado. Consulta disponibilidade de agenda e confirma a consulta sem intervenção humana.
+          </p>
+        </div>
+      </div>
+
+      <div class="polycard p-4 sm:p-6 rounded-xl flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary mb-4">
+            <span class="material-symbols-outlined text-2xl">notifications_active</span>
+          </div>
+          <h3 class="h3-title mb-2">Redução de Faltas (No-Show)</h3>
+          <p class="body-text">
+            Envia lembretes automáticos 24h e 2h antes com botões de Confirmação ou Remarcação rápida, recuperando horários ociosos na agenda.
+          </p>
+        </div>
+      </div>
+
+      <div class="polycard p-4 sm:p-6 rounded-xl flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary mb-4">
+            <span class="material-symbols-outlined text-2xl">emergency</span>
+          </div>
+          <h3 class="h3-title mb-2">Detecção de Urgências</h3>
+          <p class="body-text">
+            Identifica palavras de dor intensa, trauma ou sangramento e transfere imediatamente o paciente para a recepcionista humana com aviso de prioridade.
+          </p>
+        </div>
+      </div>
+
+      <div class="polycard p-4 sm:p-6 rounded-xl flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary mb-4">
+            <span class="material-symbols-outlined text-2xl">handshake</span>
+          </div>
+          <h3 class="h3-title mb-2">Transbordo Humano Fluido</h3>
+          <p class="body-text">
+            A qualquer momento o paciente pode pedir para falar com uma atendente. A IA pausa e entrega para a recepção com um resumo completo do caso.
+          </p>
+        </div>
+      </div>
+
+      <div class="polycard p-4 sm:p-6 rounded-xl flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary mb-4">
+            <span class="material-symbols-outlined text-2xl">star_rate</span>
+          </div>
+          <h3 class="h3-title mb-2">Pós-Consulta & Reativação</h3>
+          <p class="body-text">
+            Pesquisa de satisfação após o atendimento e réguas de reativação para retornos preventivos sem sobrecarregar a sua equipe de recepção.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Custos Transparentes & Infraestrutura -->
+  <section id="infraestrutura" class="py-16 md:py-20 px-3 sm:px-4 md:px-6 max-w-container-max mx-auto w-full border-b border-outline">
+    <div class="bg-surface border border-outline rounded-2xl sm:rounded-3xl p-4 sm:p-8 md:p-12 relative">
+      
+      <div class="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
+        <span class="kicker mb-2">TRANSPARÊNCIA TOTAL</span>
+        <h2 class="h2-title mb-3 sm:mb-4">
+          O Que Você Vai Gastar Além dos R$ 500/ano?
+        </h2>
+        <p class="lead-text max-w-2xl mx-auto">
+          Aqui não tem pegadinha nem letras miúdas. Você adquire a <strong class="text-white font-semibold">Licença Anual por R$ 500/ano</strong> com direito a atualizações futuras e instalação gratuita no seu domínio. 
+          Abaixo mostramos exatamente os custos de infraestrutura direta para você manter o sistema funcionando:
+        </p>
+      </div>
+
+      <!-- Card Bônus: Instalação Gratuita (100% Responsivo Mobile) -->
+      <div class="glass-panel p-4 sm:p-6 rounded-2xl border-2 border-primary/50 mb-8 md:mb-12 flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-6 bg-primary/5">
+        <div class="space-y-3">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-primary/20 border border-primary flex items-center justify-center text-primary shrink-0">
+              <span class="material-symbols-outlined text-2xl sm:text-3xl">build_circle</span>
+            </div>
+            <div>
+              <span class="inline-block px-2 py-0.5 rounded bg-primary text-black font-bold text-[9px] sm:text-[10px] font-mono uppercase mb-0.5">Incluso na Compra</span>
+              <h3 class="h3-title">Instalação e Configuração 100% GRATUITA</h3>
+            </div>
+          </div>
+          <p class="body-text">
+            Você não precisa quebrar a cabeça com tecnologia. Nós instalamos, conectamos as chaves e deixamos o Agenda-Med rodando no seu domínio sem cobrar nada a mais por isso!
+          </p>
+        </div>
+        <div class="pt-3 md:pt-0 border-t md:border-t-0 border-outline/50 shrink-0 font-mono text-left md:text-right flex items-center justify-between md:block">
+          <span class="text-xs text-on-surface line-through block">De R$ 350,00</span>
+          <span class="text-base sm:text-xl font-bold text-primary font-display block">POR R$ 0,00 (Grátis)</span>
+        </div>
+      </div>
+
+      <!-- Grade dos 3 Custos de Infraestrutura -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-8 text-sm">
+        
+        <!-- 1. Hospedagem Hostinger -->
+        <div class="polycard p-4 sm:p-6 md:p-7 rounded-2xl flex flex-col justify-between border-primary/40 relative">
+          <div class="inline-block sm:absolute sm:-top-3 sm:right-4 bg-primary text-black font-bold text-[10px] px-2.5 py-0.5 font-mono uppercase tracking-wider rounded self-start mb-3 sm:mb-0">
+            Domínio Grátis
+          </div>
+          <div>
+            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary mb-4">
+              <span class="material-symbols-outlined text-2xl">dns</span>
+            </div>
+            <span class="text-xs font-mono text-primary uppercase tracking-wider block mb-1">Passo 1 • Hospedagem</span>
+            <h3 class="h3-title mb-1">Hostinger (Plano Premium)</h3>
+            <span class="inline-block text-[11px] font-mono text-primary mb-3">Recomendado • Domínio Grátis por 1 ano</span>
+            <p class="text-on-surface text-xs leading-relaxed mb-4">
+              Escolha o <strong>Plano Premium</strong> da Hostinger: além de rodar o Agenda-Med com velocidade máxima, <strong>você ganha o seu Domínio (.com ou .com.br) 100% GRÁTIS por 1 ano</strong>!
+            </p>
+            <div class="bg-background/80 p-3.5 rounded-xl border border-outline text-xs space-y-1.5 mb-6 font-mono text-on-surface">
+              <p>💰 A partir de: <strong class="text-primary">R$ 8,79/mês</strong> (com seu cupom)</p>
+              <p>🎁 <strong>Domínio Grátis por 1 ano</strong> incluso no plano</p>
+              <p>🔒 Certificado SSL grátis para sempre</p>
+              <p>⚡ 20 GB SSD e suporte a até 3 sites</p>
+            </div>
+          </div>
+          <a href="https://www.hostinger.com/br?REFERRALCODE=YJPALEXDE9LO" target="_blank" rel="noopener" class="btn-outline w-full flex items-center justify-center gap-1.5 hover:border-primary text-decoration-none">
+            <span>Ver Hostinger (Domínio Grátis)</span>
+            <span class="material-symbols-outlined">open_in_new</span>
+          </a>
+        </div>
+
+        <!-- 2. WhatsApp (EvoHub vs Evo Go) -->
+        <div class="polycard p-4 sm:p-6 md:p-7 rounded-2xl flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary mb-4">
+              <span class="material-symbols-outlined text-2xl">chat</span>
+            </div>
+            <span class="text-xs font-mono text-primary uppercase tracking-wider block mb-1">Passo 2 • Conexão WhatsApp</span>
+            <h3 class="h3-title mb-3">WhatsApp: Oficial vs VPS</h3>
+            <p class="text-on-surface text-xs leading-relaxed mb-4">
+              Escolha a melhor estratégia de conexão para o perfil da sua clínica:
+            </p>
+            
+            <div class="space-y-3 mb-6 text-xs">
+              <div class="bg-background/80 p-3 rounded-xl border border-primary/40 relative">
+                <span class="text-[9px] font-mono text-primary font-bold uppercase tracking-wider block mb-1">🛡️ Método Oficial • Recomendado</span>
+                <p class="font-bold text-on-background mb-0.5">Opção A: EvoHub (API Oficial Meta)</p>
+                <p class="text-[11px] text-on-surface leading-relaxed">
+                  Conexão homologada pela Meta. <strong>Risco de banimento quase zero</strong> para o número principal da clínica. Não necessita de VPS. Conta em <a href="https://app.evohub.evolutionfoundation.com.br/" target="_blank" class="text-primary underline">app.evohub.evolutionfoundation.com.br</a>.
+                </p>
+              </div>
+
+              <div class="bg-background/80 p-3 rounded-xl border border-outline">
+                <span class="text-[9px] font-mono text-amber-400 font-bold uppercase tracking-wider block mb-1">⚡ Não Oficial • Requer VPS</span>
+                <p class="font-bold text-on-background mb-0.5">Opção B: Evo Go (WhatsApp Web / VPS)</p>
+                <p class="text-[11px] text-on-surface leading-relaxed">
+                  Conexão via QR Code em VPS própria (Hostinger). Possui <strong>anti-ban integrado</strong> no sistema, mas por ser emulação web não-oficial, <strong>existe risco de bloqueio</strong> caso ocorram denúncias ou disparos massivos.
+                </p>
+              </div>
+            </div>
+          </div>
+          <a href="https://app.evohub.evolutionfoundation.com.br/" target="_blank" rel="noopener" class="btn-outline w-full flex items-center justify-center gap-1.5 hover:border-primary text-decoration-none">
+            <span>Conhecer EvoHub (Oficial)</span>
+            <span class="material-symbols-outlined">open_in_new</span>
+          </a>
+        </div>
+
+        <!-- 3. Chaves de IA -->
+        <div class="polycard p-4 sm:p-6 md:p-7 rounded-2xl flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary mb-4">
+              <span class="material-symbols-outlined text-2xl">neurology</span>
+            </div>
+            <span class="text-xs font-mono text-primary uppercase tracking-wider block mb-1">Passo 3 • Inteligência Artificial</span>
+            <h3 class="h3-title mb-3">Chaves de API das IAs</h3>
+            <p class="text-on-surface text-xs leading-relaxed mb-4">
+              Você conecta a sua própria chave de API diretamente no provedor que escolher. O consumo varia conforme a quantidade de mensagens e transcrições de áudio recebidas:
+            </p>
+            
+            <div class="grid grid-cols-2 gap-2 text-[11px] font-mono mb-4">
+              <a href="https://aistudio.google.com/" target="_blank" rel="noopener" class="bg-background/80 p-2 sm:p-2.5 rounded-lg border border-outline hover:border-primary block text-decoration-none text-on-surface hover:text-primary transition-all">
+                <span class="font-bold block text-white text-[11px] sm:text-xs">Google Gemini</span>
+                <span class="text-[9px] sm:text-[10px] text-green-400">Texto e Áudio</span>
+              </a>
+              <a href="https://platform.moonshot.cn/" target="_blank" rel="noopener" class="bg-background/80 p-2 sm:p-2.5 rounded-lg border border-outline hover:border-primary block text-decoration-none text-on-surface hover:text-primary transition-all">
+                <span class="font-bold block text-white text-[11px] sm:text-xs">Kimi AI</span>
+                <span class="text-[9px] sm:text-[10px] text-primary">Contexto longo</span>
+              </a>
+              <a href="https://platform.openai.com/" target="_blank" rel="noopener" class="bg-background/80 p-2 sm:p-2.5 rounded-lg border border-outline hover:border-primary block text-decoration-none text-on-surface hover:text-primary transition-all">
+                <span class="font-bold block text-white text-[11px] sm:text-xs">OpenAI (GPT)</span>
+                <span class="text-[9px] sm:text-[10px] text-blue-400">Padrão indústria</span>
+              </a>
+              <a href="https://openrouter.ai/" target="_blank" rel="noopener" class="bg-background/80 p-2 sm:p-2.5 rounded-lg border border-outline hover:border-primary block text-decoration-none text-on-surface hover:text-primary transition-all">
+                <span class="font-bold block text-white text-[11px] sm:text-xs">OpenRouter</span>
+                <span class="text-[9px] sm:text-[10px] text-purple-400">Vários modelos</span>
+              </a>
+            </div>
+          </div>
+          <div class="text-[10px] sm:text-[11px] text-center text-on-surface/80 font-mono py-2 bg-background/50 rounded-lg border border-outline">
+            ⚠️ O consumo é pago direto na sua conta do provedor de acordo com o uso real de texto e áudio da clínica.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Preço e Oferta Kiwify -->
+  <section class="py-20 md:py-24 px-4 md:px-6 max-w-container-max mx-auto w-full text-center">
+    <div class="max-w-2xl mx-auto polycard card-scanner border-primary/60 p-6 sm:p-10 md:p-12 rounded-3xl shadow-2xl relative">
+      
+      <div class="absolute -top-12 -right-12 w-40 h-40 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <span class="kicker mb-3">
+        LICENÇA ANUAL • ATUALIZAÇÕES FUTURAS INCLUSAS
+      </span>
+
+      <h2 class="h2-title mb-2">
+        Adquira a Licença do Agenda-Med
+      </h2>
+      <p class="lead-text mb-6">
+        Licença de 12 meses + Atualizações futuras + Instalação gratuita no seu domínio
+      </p>
+
+      <div class="flex items-baseline justify-center gap-2 mb-2">
+        <span class="text-xs text-on-surface line-through font-mono">De R$ 1.200,00</span>
+        <span class="price-display">R$ 500,00<span class="text-sm sm:text-base text-on-surface font-normal">/ano</span></span>
+      </div>
+      <p class="caption-text font-mono mb-8">R$ 500 no PIX ou em até 12x no cartão de crédito na Kiwify</p>
+
+      <div class="space-y-3 text-left max-w-md mx-auto mb-8 text-sm text-on-surface">
+        <div class="flex items-center gap-2">
+          <span class="text-primary font-bold">✓</span>
+          <span>Licença anual (12 meses) com direito a atualizações futuras</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-primary font-bold">✓</span>
+          <span>Instalação e configuração 100% gratuita no seu domínio</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-primary font-bold">✓</span>
+          <span>Compatível com hospedagem Hostinger (menor plano)</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-primary font-bold">✓</span>
+          <span>Integração com Evolution Go / Hub no WhatsApp</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-primary font-bold">✓</span>
+          <span>Garantia incondicional de 7 dias via Kiwify</span>
+        </div>
+      </div>
+
+      <a href="https://pay.kiwify.com.br/FHyPL4m" class="btn-primary w-full flex items-center justify-center gap-2 text-decoration-none mb-4">
+        <span>GARANTIR LICENÇA — R$ 500</span>
+        <span class="material-symbols-outlined">arrow_forward</span>
+      </a>
+
+      <div class="flex items-center justify-center gap-4 text-xs font-mono text-on-surface">
+        <span class="flex items-center gap-1">🔒 Kiwify Checkout</span>
+        <span class="flex items-center gap-1">⚡ Acesso Imediato</span>
+        <span class="flex items-center gap-1">🛡️ 7 Dias de Garantia</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-16 px-4 md:px-6 max-w-3xl mx-auto w-full border-t border-outline">
+    <h2 class="h2-title text-center mb-8 sm:mb-10">
+      Perguntas Frequentes
+    </h2>
+
+    <div class="space-y-4">
+      <div class="polycard p-4 sm:p-5 rounded-xl">
+        <h3 class="h3-title mb-2 !text-sm sm:!text-base">Preciso saber programar para usar o Agenda-Med?</h3>
+        <p class="body-text">
+          Não! O sistema já vem pronto. Além disso, você tem o nosso suporte técnico para instalar e colocar ele no ar no seu domínio.
+        </p>
+      </div>
+
+      <div class="polycard p-4 sm:p-5 rounded-xl">
+        <h3 class="h3-title mb-2 !text-sm sm:!text-base">Como funciona a licença anual de R$ 500?</h3>
+        <p class="body-text">
+          Ao adquirir o Agenda-Med, você paga apenas R$ 500 por 1 ano inteiro de uso, com direito a todas as atualizações e melhorias lançadas durante o período. Você não paga mensalidades de software de R$ 300 a R$ 500 todo mês como em outras plataformas.
+        </p>
+      </div>
+
+      <div class="polycard p-4 sm:p-5 rounded-xl">
+        <h3 class="h3-title mb-2 !text-sm sm:!text-base">Qual a diferença entre EvoHub e Evo Go no WhatsApp? Qual tem menos risco?</h3>
+        <p class="body-text">
+          O <strong>EvoHub</strong> conecta através da API Oficial da Meta (Cloud API), sendo o método mais seguro e com <strong>risco de banimento praticamente nulo</strong> para o número principal da clínica, além de não exigir servidor VPS. Já o <strong>Evolution Go</strong> conecta via WhatsApp Web rodando em uma VPS própria: tem sistema anti-ban integrado, mas por ser um método não-oficial de emulação, exige maior cautela para não sofrer bloqueios da Meta.
+        </p>
+      </div>
+
+      <div class="polycard p-4 sm:p-5 rounded-xl">
+        <h3 class="h3-title mb-2 !text-sm sm:!text-base">Como recebo o acesso e a instalação após a compra?</h3>
+        <p class="body-text">
+          Assim que o pagamento for aprovado pela Kiwify, você recebe imediatamente no seu e-mail a confirmação e o contato direto do nosso suporte técnico para realizarmos a instalação gratuita no seu domínio.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-outline py-12 px-4 md:px-6 mt-auto bg-surface">
+    <div class="max-w-container-max mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-on-surface">
+      <div class="flex items-center gap-3">
+        <img src="https://m2vendas.com.br/img/logo_transparent.png" alt="M2 Vendas" class="h-8 w-auto" />
+        <span>© 2026 M2 Vendas. Todos os direitos reservados.</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="https://m2vendas.com.br/" class="hover:text-primary transition-colors">Marketplace M2 Vendas</a>
+        <a href="https://pay.kiwify.com.br/FHyPL4m" class="hover:text-primary transition-colors">Checkout Kiwify</a>
+        <a href="https://wa.me/5575998636036?text=Ol%C3%A1%21+Gostaria+de+tirar+d%C3%BAvidas+sobre+o+Agenda-Med+da+M2+Vendas." class="hover:text-primary transition-colors">WhatsApp Suporte</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
