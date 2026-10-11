@@ -993,6 +993,7 @@ $whatsapp_url = 'https://wa.me/5575998636036?text=' . urlencode('Olá! Gostaria 
       </div>
       <div class="flex items-center gap-6">
         <a href="https://m2vendas.com.br/" class="hover:text-primary transition-colors">Marketplace M2 Vendas</a>
+        <a href="/afiliados" class="text-primary font-semibold hover:underline flex items-center gap-1">🤝 Seja um Afiliado (40%)</a>
         <a href="<?= htmlspecialchars($checkout_url) ?>" class="hover:text-primary transition-colors">Checkout Kiwify</a>
         <a href="<?= htmlspecialchars($whatsapp_url) ?>" class="hover:text-primary transition-colors">WhatsApp Suporte</a>
       </div>
